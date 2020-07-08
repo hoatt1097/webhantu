@@ -1,25 +1,5 @@
 
- 
 $(document).ready(function () {
-
-    var data = [];
-    function readTextFile(file)
-    {
-        var rawFile = new XMLHttpRequest();
-        rawFile.open("GET", file, false);
-        rawFile.onreadystatechange = function ()
-        {
-            if(rawFile.readyState === 4)
-            {
-                if(rawFile.status === 200 || rawFile.status == 0)
-                {
-                    var allText = rawFile.responseText;
-                    data =  allText.split(/\n|\r/g);
-                }
-            }
-        }
-        rawFile.send(null);
-    }
 
     function shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
@@ -47,7 +27,8 @@ $(document).ready(function () {
             break;
           }
         }
-      }
+    }
+    
 
     function getKanji(word) {
         return word.split(":")[0].trim().toUpperCase();
@@ -56,22 +37,23 @@ $(document).ready(function () {
     function getMean(word) {
         return word.split(":")[1].trim().toUpperCase();
     }
-
-    readTextFile("data.txt")
     
     Millionaire = (function () {
         function Millionaire() {
-            this._questionArray = data;
+            this._questionArray = [];
             this._number = 0;
             this._numberRight = 0;
             this._indexCurrent = this.random(5);
-            this._answerArray = shuffle([this._indexCurrent, this.random(data.length), this.random(data.length), this.random(data.length)]);
+            this._answerArray = [];
             this._answer = "";
+            this._fileData = "hantudon.txt"
             this._color = '#3498db';
             _this = this;
         }
 
         Millionaire.prototype.startGame = function () {
+            this.readFile(this._fileData);
+            console.log(this._questionArray[1])
             this._number = 0;
             this._numberRight = 0;
             this._indexCurrent = this.random(this._questionArray.length)
@@ -80,6 +62,20 @@ $(document).ready(function () {
             this._answerArray = shuffle([this._indexCurrent, this.random(this._questionArray.length), this.random(this._questionArray.length), this.random(this._questionArray.length)]);
             this.displayQuestion();
         };
+
+        Millionaire.prototype.readFile = function (file) {
+            var result = [];
+            $.ajax({
+                url: file,
+                dataType: 'text',
+                async: false,
+                success: function(data) {
+                    result = data.split('\n');
+                } 
+            });
+            this._questionArray = result;
+        };
+
 
         Millionaire.prototype.displayQuestion = function () {
             $("#boxA").css('background-color', '#3498db');
@@ -111,10 +107,8 @@ $(document).ready(function () {
         Millionaire.prototype.checkResult = function () {
             if (this._answer.toUpperCase() === getMean(this._questionArray[this._indexCurrent])) {
                 this._numberRight++
-                console.log(this._numberRight)
                 this.nextQuestion();
             } else {
-                console.log(this._numberRight)
                 this.nextQuestion();
             }
         };
@@ -138,13 +132,18 @@ $(document).ready(function () {
                 this._number++;
                 this._indexCurrent = this.random(this._questionArray.length)
                 var number = this._number + 1;
-                console.log(number)
                 $("#question-number").html(this._numberRight + " / " + this._number);
                 $("#display-question").html(getKanji(this._questionArray[this._indexCurrent]));
                 this._answerArray = shuffle([this._indexCurrent, this.random(this._questionArray.length), this.random(this._questionArray.length), this.random(this._questionArray.length)]);
                 this.displayQuestion();
             }
-        };  
+        }; 
+        
+        Millionaire.prototype.changeData = function (value,lessonName) {
+            this._fileData = value;
+            $(".lesson-name").html(lessonName);
+            this.startGame();
+        };
 
         Millionaire.prototype.random = function (max) {
             return Math.floor(Math.random() * max);
@@ -166,6 +165,12 @@ $(document).ready(function () {
             Millionaire.selectBox(_this.targetID);
         }
     });
+
+    $(".lesson").click(function (e) {
+        var Millionaire = window.Millionaire;
+        Millionaire.changeData(this.value, $(this).html());
+    });
+
 
     
     $("#restart-game").click(function (e) {

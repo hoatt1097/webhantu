@@ -10,12 +10,14 @@
 </head>
 <body>
     <div id="each-question" class="row">
+        <span class="lesson-name">Hán tự đơn:</span>
         <table>
             <thead>
                 <tr>
                     <div id="question">
                         <span id="question-number"></span>
                         <span id="display-question"></span>
+                        <span id="timer"></span>
                     </div>
                 <tr>
             </thead>
@@ -42,12 +44,14 @@
         <div class="form-group" id="result-button">
             <button class="btn btn-danger float-right" id="restart-game">Restart Game</button>
         </div>
-        <div class="notice">
-            <div class="alert" id="alert"></div>
-        </div>
+
+        
     </div>
     <br>
-    
+    <div class="form-group row">
+        <button class="btn btn-primary float-right lesson" value="hantudon.txt">Hán tự đơn</button>
+        <button class="btn btn-primary float-right lesson" value="lesson1.txt">Bài 1</button>
+    </div>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" ></script>

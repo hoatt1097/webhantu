@@ -75,6 +75,10 @@ h1 {
 .container {
     padding-top: 30px;
 }
+.lesson {
+    margin-right: 3px;
+    background-color: cadetblue;
+}
 .box {
     display: inline-block;
     background-color : #3498db;
