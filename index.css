@@ -30,11 +30,32 @@ h1 {
     margin-right: 10px;
     padding: 5px 10px;
 }
+#result-button {
+    margin-top: 10px;
+    width: 100%;
+}
 #display-question {
     font-size: 50px;
 }
+table {
+    margin-top: 6px;
+}
+.mean {
+    width: 100%;
+}
+.btn-mean {
+    font-style: italic;
+    font-family: serif;
+    margin-left: 20px;
+}
+.text-mean {
+    font-weight: bold;
+}
+.btn-mean:hover{
+    cursor: pointer;
+}
 #question {
-    margin-bottom:20px;
+    margin-bottom: 06px;
     color: #FFFFFF;
     border-radius: 4em 0px 4em 0px;
     -moz-border-radius: 4em 0px 4em 0px;

@@ -1,5 +1,12 @@
 
 $(document).ready(function () {
+    $('#dtVerticalScrollExample').DataTable({
+        "scrollY": "200px",
+        "scrollCollapse": true,
+        "searching": false,
+        "lengthChange": false,
+
+    });
 
     function shuffle(array) {
         var currentIndex = array.length, temporaryValue, randomIndex;
@@ -40,6 +47,7 @@ $(document).ready(function () {
     
     Millionaire = (function () {
         function Millionaire() {
+            this._data = [];
             this._questionArray = [];
             this._number = 0;
             this._numberRight = 0;
@@ -53,13 +61,16 @@ $(document).ready(function () {
 
         Millionaire.prototype.startGame = function () {
             this.readFile(this._fileData);
-            console.log(this._questionArray[1])
+            console.log(this._questionArray)
+            this._data = [...this._questionArray];
             this._number = 0;
             this._numberRight = 0;
             this._indexCurrent = this.random(this._questionArray.length)
             $("#question-number").html(this._numberRight + " / " + this._number);
             $("#display-question").html(getKanji(this._questionArray[this._indexCurrent]));
-            this._answerArray = shuffle([this._indexCurrent, this.random(this._questionArray.length), this.random(this._questionArray.length), this.random(this._questionArray.length)]);
+            $(".text-mean").html(getKanji(this._questionArray[this._indexCurrent]) + " : " + getMean(this._questionArray[this._indexCurrent]));
+            this.showTableMean();
+            this._answerArray = this.createArrayAnswer();
             this.displayQuestion();
         };
 
@@ -78,10 +89,10 @@ $(document).ready(function () {
 
 
         Millionaire.prototype.displayQuestion = function () {
-            $("#boxA").css('background-color', '#3498db');
-            $("#boxB").css('background-color', '#3498db');
-            $("#boxC").css('background-color', '#3498db');
-            $("#boxD").css('background-color', '#3498db');
+            // $("#boxA").css('background-color', '#3498db');
+            // $("#boxB").css('background-color', '#3498db');
+            // $("#boxC").css('background-color', '#3498db');
+            // $("#boxD").css('background-color', '#3498db');
 
             $("#boxA").html(getMean(this._questionArray[this._answerArray[0]]));
             $("#boxB").html(getMean(this._questionArray[this._answerArray[1]]));
@@ -98,7 +109,7 @@ $(document).ready(function () {
                 $("#boxB").css('background-color', '#3498db');
                 $("#boxC").css('background-color', '#3498db');
                 $("#boxD").css('background-color', '#3498db');
-                $(id).css('background-color', '#f1c40f');
+                // $(id).css('background-color', '#f1c40f');
                 this._answer = $("#" + boxID).html();
             }
             this.checkResult();
@@ -114,7 +125,6 @@ $(document).ready(function () {
         };
 
         Millionaire.prototype.nextQuestion = function () {
-
             if(this._number === 50) {
                 if(this._numberRight < 30) {
                     alert("Quá tệ \n " + this._numberRight + " / " + this._number)
@@ -129,16 +139,50 @@ $(document).ready(function () {
                 this.startGame();
             }
             else {
+                if(this._questionArray.length > 4)
+                {
+                    this._questionArray.splice(this._indexCurrent, 1);
+                }
+                if(this._questionArray.length == 4){
+                    this.readFile(this._fileData);
+                }
                 this._number++;
                 this._indexCurrent = this.random(this._questionArray.length)
                 var number = this._number + 1;
                 $("#question-number").html(this._numberRight + " / " + this._number);
                 $("#display-question").html(getKanji(this._questionArray[this._indexCurrent]));
-                this._answerArray = shuffle([this._indexCurrent, this.random(this._questionArray.length), this.random(this._questionArray.length), this.random(this._questionArray.length)]);
+                $(".text-mean").html(getKanji(this._questionArray[this._indexCurrent]) + " : " + getMean(this._questionArray[this._indexCurrent]));
+                this._answerArray = this.createArrayAnswer();
                 this.displayQuestion();
             }
         }; 
+
+        Millionaire.prototype.createArrayAnswer = function () {
+            this._answerArray = [this._indexCurrent]
+            while(this._answerArray.length < 4) {
+                var a = this.random(this._questionArray.length)
+                if( !this._answerArray.includes(a)){
+                    this._answerArray.push(a);
+                }
+            }
+            return shuffle(this._answerArray);
+        };
         
+        Millionaire.prototype.showTableMean = function () {
+            $(".vocabulary-content").children().remove();
+            for(var i = 0; i < this._data.length; i++) {
+                $(".vocabulary-content").append("<tr class='word-" + i +"'></tr>")
+                arrayWord = this._data[i].split(":");
+                for(var j = 0; j < arrayWord.length; j ++){
+                    $(".word-" + i).append('<td>' + arrayWord[j] + '</td>');
+                }
+                if(arrayWord.length == 2){
+                    $(".word-" + i).append('<td></td>');
+                }
+            }
+        };
+        
+
         Millionaire.prototype.changeData = function (value,lessonName) {
             this._fileData = value;
             $(".lesson-name").html(lessonName);
@@ -178,6 +222,16 @@ $(document).ready(function () {
         var Millionaire = window.Millionaire;
         Millionaire.startGame();
 
+    });
+
+    $(".btn-mean").click(function() {
+        $(".text-mean").fadeToggle(function(){
+            if ($(this).is(':visible')) {
+                $(".btn-mean").html(">>> Mean");                
+            } else {
+                $(".btn-mean").html("<b><<< Mean</b>");                
+            } 
+        });
     });
 
     var Millionaire = new Millionaire();
