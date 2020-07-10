@@ -1,11 +1,11 @@
 
 $(document).ready(function () {
     $('#dtVerticalScrollExample').DataTable({
-        "scrollY": "200px",
-        "scrollCollapse": true,
+        "scrollY": "400px",
         "searching": false,
-        "lengthChange": false,
-
+        "bPaginate": false,
+        "bLengthChange": false,
+        "bFilter": false,
     });
 
     function shuffle(array) {
@@ -44,6 +44,10 @@ $(document).ready(function () {
     function getMean(word) {
         return word.split(":")[1].trim().toUpperCase();
     }
+
+    function getHantu(word) {
+        return word.split(":")[2] ? " : " + word.split(":")[2].trim().toUpperCase() : "";
+    }
     
     Millionaire = (function () {
         function Millionaire() {
@@ -61,14 +65,13 @@ $(document).ready(function () {
 
         Millionaire.prototype.startGame = function () {
             this.readFile(this._fileData);
-            console.log(this._questionArray)
             this._data = [...this._questionArray];
             this._number = 0;
             this._numberRight = 0;
             this._indexCurrent = this.random(this._questionArray.length)
             $("#question-number").html(this._numberRight + " / " + this._number);
             $("#display-question").html(getKanji(this._questionArray[this._indexCurrent]));
-            $(".text-mean").html(getKanji(this._questionArray[this._indexCurrent]) + " : " + getMean(this._questionArray[this._indexCurrent]));
+            $(".text-mean").html(getKanji(this._questionArray[this._indexCurrent]) + " : " + getMean(this._questionArray[this._indexCurrent]) + getHantu(this._questionArray[this._indexCurrent]));
             this.showTableMean();
             this._answerArray = this.createArrayAnswer();
             this.displayQuestion();
@@ -151,7 +154,7 @@ $(document).ready(function () {
                 var number = this._number + 1;
                 $("#question-number").html(this._numberRight + " / " + this._number);
                 $("#display-question").html(getKanji(this._questionArray[this._indexCurrent]));
-                $(".text-mean").html(getKanji(this._questionArray[this._indexCurrent]) + " : " + getMean(this._questionArray[this._indexCurrent]));
+                $(".text-mean").html(getKanji(this._questionArray[this._indexCurrent]) + " : " + getMean(this._questionArray[this._indexCurrent]) + getHantu(this._questionArray[this._indexCurrent]));
                 this._answerArray = this.createArrayAnswer();
                 this.displayQuestion();
             }
@@ -174,7 +177,7 @@ $(document).ready(function () {
                 $(".vocabulary-content").append("<tr class='word-" + i +"'></tr>")
                 arrayWord = this._data[i].split(":");
                 for(var j = 0; j < arrayWord.length; j ++){
-                    $(".word-" + i).append('<td>' + arrayWord[j] + '</td>');
+                    $(".word-" + i).append('<td>' + arrayWord[j].toUpperCase() + '</td>');
                 }
                 if(arrayWord.length == 2){
                     $(".word-" + i).append('<td></td>');

@@ -1,0 +1,81 @@
+午前:ごぜん:ngọ tiền
+午後:ごご:ngọ hậu
+今:いま:kim
+朝:あさ:triều
+昼:ひる:trú
+夜:よる:dạ
+晩:ばん:vãn
+夕方:ようがた:tịch phương
+夕べ:ゆうべ:tịch
+今朝:けさ:kim triều
+今晩:こんばん:kim vãn
+昨日:きのう:tạc nhật
+今日:きょう:kim nhật
+明日:あした:minh nhật
+先々週:せんせんしゅう:tiên kép chu
+先週:せんしゅう:tiên chu
+今週:こんしゅう:kim chu
+来週:らいしゅう:lai chu
+先々月:せんせんげつ:tiên kép nguyệt
+先月:せんげつ:tiên nguyệt
+今月:こんげつ:kim nguyệt
+来月:らいげつ:lai nguyệt
+去年:きょねん:khứ niên
+今年:ことし:kim niên
+来年:らいねん:lai niên
+毎朝:まいあさ:mỗi triều
+毎晩:まいばん:mỗi vãn
+毎日:まいにち:mỗi nhật
+毎週:まいしゅう:mỗi chu
+毎月:まいつき:mỗi nguyệt
+毎年:まいとし:mỗi niên
+週末:しゅうまつ:chu lai
+月末:げつまつ:nguyệt lai
+年末:ねんまつ:niên lai
+〜時:〜じ:thời
+〜分:〜ふん・〜ぶん:phân
+〜時半:〜じはん:thời bán
+月よう日:げつようび:nguyệt nhật
+火よう日:かようび:hỏa nhật
+水よう日:すいようび:thủy nhật
+木よう日:もくようび:mộc nhật
+金よう日:きんようび:kim nhật
+土よう日:どようび:thổ nhật
+日よう日:にちようび:nhật nhật
+高い:たかい:cao
+安い:やすい:an
+古い:ふるい:cổ
+広い:ひろい:quảng
+暗い:くらい:ám
+重い:おもい:trọng
+軽い:かるい:khinh
+良い:いい〜よい:lương
+悪い:わるい:ác
+赤い:あかい:xích
+青い:あおい:thanh
+白い:しろい:bạch
+黒い:くろい:ám
+長い:ながい:trường
+短い:みじかい:đoản
+暑い:あつい:thử
+寒い:さむい:hàn
+近い:ちかい:cận
+易しい:やさしい:dịch
+難しい:むずかしい:nan
+楽しい:たのしい:lạc
+新しい:あたらしい:tân
+涼しい:すずしい:lương
+小さい:ちいさい:tiểu
+大きい:おおきい:đại
+明るい:あかるい:minh
+元気:げんき:nguyên khí
+親切:しんせつ:thân thiết
+大変:たいへん:đại biến
+不便:ふべん:bất tiện
+便利:べんり:tiện lợi
+丈夫:じょうぶ:trượng phu
+有名:ゆうめい:hữu danh
+上手:じょうず:thượng thủ
+下手:へた:hạ thủ
+好き:すき:hảo
+静か:しずか:tịnh
